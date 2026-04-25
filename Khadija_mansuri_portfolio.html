@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khadija Mansuri | Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f7f4;
+  --bg2:#ffffff;
+  --surface:#f0ede8;
+  --text:#1a1a1a;
+  --muted:#6b6b6b;
+  --accent:#2d6a4f;
+  --accent2:#52b788;
+  --accent3:#b7e4c7;
+  --yellow:#f4a261;
+  --border:#e0ddd8;
+  --font:'Outfit',sans-serif;
+  --mono:'Fira Code',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:400;line-height:1.6;overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:3px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;z-index:999;
+  background:rgba(248,247,244,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.9rem 5%;
+}
+.nav-brand{
+  font-weight:800;font-size:1.2rem;color:var(--accent);
+  text-decoration:none;letter-spacing:-0.02em;
+}
+.nav-brand span{color:var(--yellow)}
+.nav-links{display:flex;gap:0.25rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:500;
+  padding:0.4rem 0.9rem;border-radius:999px;transition:all 0.2s;
+}
+.nav-links a:hover{color:var(--accent);background:var(--accent3)}
+.nav-links a.active{color:var(--accent);background:var(--accent3)}
+.nav-toggle{display:none;cursor:pointer;font-size:1.3rem;color:var(--accent)}
+
+/* HERO */
+#home{
+  min-height:100vh;display:flex;align-items:center;
+  padding:6rem 5% 4rem;position:relative;overflow:hidden;
+}
+.hero-blob{
+  position:absolute;right:-80px;top:50%;transform:translateY(-50%);
+  width:520px;height:520px;border-radius:60% 40% 70% 30%/50% 60% 40% 50%;
+  background:linear-gradient(135deg,#b7e4c7 0%,#74c69d 50%,#52b788 100%);
+  opacity:0.18;animation:blobMove 8s ease-in-out infinite;z-index:0;
+}
+@keyframes blobMove{
+  0%,100%{border-radius:60% 40% 70% 30%/50% 60% 40% 50%}
+  50%{border-radius:40% 60% 30% 70%/60% 40% 60% 40%}
+}
+.hero-dots{
+  position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;
+  background-image:radial-gradient(var(--border) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.hero-content{position:relative;z-index:1;max-width:700px}
+.hero-greeting{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--accent3);color:var(--accent);
+  font-size:0.82rem;font-weight:600;letter-spacing:0.05em;
+  padding:0.4rem 1rem;border-radius:999px;margin-bottom:1.5rem;
+  animation:fadeUp 0.5s ease both;
+}
+.hero-greeting::before{content:'👋';font-size:0.9rem}
+.hero-name{
+  font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;
+  line-height:1.05;letter-spacing:-0.03em;
+  animation:fadeUp 0.5s 0.1s ease both;
+}
+.hero-name .hi{color:var(--muted);font-weight:300;font-size:0.6em}
+.hero-name .name-acc{color:var(--accent)}
+.hero-role{
+  font-family:var(--mono);font-size:1.1rem;color:var(--accent2);
+  margin-top:0.75rem;animation:fadeUp 0.5s 0.2s ease both;
+}
+.hero-role::before{content:'> ';color:var(--muted)}
+.hero-desc{
+  color:var(--muted);font-size:1rem;max-width:520px;
+  margin-top:1.2rem;animation:fadeUp 0.5s 0.3s ease both;
+}
+.hero-btns{
+  display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:2rem;
+  animation:fadeUp 0.5s 0.4s ease both;
+}
+.btn-green{
+  background:var(--accent);color:#fff;
+  padding:0.75rem 1.75rem;border-radius:8px;
+  font-size:0.9rem;font-weight:600;text-decoration:none;
+  border:2px solid var(--accent);transition:all 0.2s;
+}
+.btn-green:hover{background:transparent;color:var(--accent)}
+.btn-ghost{
+  background:transparent;color:var(--accent);
+  padding:0.75rem 1.75rem;border-radius:8px;
+  font-size:0.9rem;font-weight:600;text-decoration:none;
+  border:2px solid var(--accent);transition:all 0.2s;
+}
+.btn-ghost:hover{background:var(--accent);color:#fff}
+.hero-stats{
+  display:flex;gap:2rem;margin-top:3rem;
+  animation:fadeUp 0.5s 0.5s ease both;
+}
+.hero-stat-num{font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1}
+.hero-stat-label{font-size:0.75rem;color:var(--muted);margin-top:0.2rem}
+
+/* SECTION COMMONS */
+section{padding:5rem 5%}
+.sec-label{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-family:var(--mono);font-size:0.78rem;color:var(--accent2);
+  background:var(--surface);padding:0.3rem 0.8rem;border-radius:999px;
+  border:1px solid var(--border);margin-bottom:0.75rem;
+}
+.sec-title{
+  font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;
+  letter-spacing:-0.02em;line-height:1.1;
+}
+.sec-title span{color:var(--accent)}
+.sec-sub{color:var(--muted);margin-top:0.5rem;max-width:520px;font-size:0.95rem}
+.sec-divider{width:40px;height:3px;background:var(--accent2);border-radius:2px;margin:1rem 0 2.5rem}
+
+/* ABOUT */
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;margin-top:1rem}
+.about-img-wrap{position:relative}
+.about-img-box{
+  width:100%;aspect-ratio:1;border-radius:24px;
+  background:linear-gradient(135deg,var(--accent3),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:6rem;position:relative;overflow:hidden;
+}
+.about-img-box::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);
+}
+.about-badge{
+  position:absolute;bottom:-16px;right:-16px;
+  background:var(--accent);color:#fff;
+  padding:0.75rem 1.2rem;border-radius:12px;
+  font-size:0.8rem;font-weight:600;line-height:1.3;
+  box-shadow:0 8px 24px rgba(45,106,79,0.3);
+}
+.about-text p{color:var(--muted);margin-bottom:1rem;font-size:0.95rem}
+.about-info{
+  display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.5rem;
+}
+.info-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:0.75rem 1rem;
+}
+.info-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.info-val{font-size:0.9rem;font-weight:600;color:var(--text);margin-top:0.2rem}
+
+/* SKILLS */
+#skills{background:var(--bg)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.skill-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:1.5rem;
+  transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;
+}
+.skill-card:hover{transform:translateY(-4px);border-color:var(--accent2);box-shadow:0 12px 32px rgba(82,183,136,0.12)}
+.skill-card-icon{font-size:1.8rem;margin-bottom:0.75rem}
+.skill-card-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:0.75rem}
+.skill-pills{display:flex;flex-wrap:wrap;gap:0.4rem}
+.pill{
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);font-size:0.8rem;font-weight:500;
+  padding:0.3rem 0.75rem;border-radius:999px;
+  transition:background 0.15s,border-color 0.15s;
+}
+.pill:hover{background:var(--accent3);border-color:var(--accent2);color:var(--accent)}
+
+/* PROJECTS */
+#projects{background:var(--bg2)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.proj-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:16px;padding:1.75rem;
+  display:flex;flex-direction:column;
+  transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;
+  position:relative;overflow:hidden;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s ease;
+}
+.proj-card:hover::before{transform:scaleX(1)}
+.proj-card:hover{transform:translateY(-4px);border-color:var(--accent2);box-shadow:0 16px 40px rgba(82,183,136,0.12)}
+.proj-year{
+  font-family:var(--mono);font-size:0.72rem;color:var(--accent2);
+  background:var(--accent3);padding:0.2rem 0.6rem;border-radius:999px;
+  display:inline-block;margin-bottom:0.75rem;width:fit-content;
+}
+.proj-title{font-size:1.15rem;font-weight:700;margin-bottom:0.5rem}
+.proj-desc{color:var(--muted);font-size:0.88rem;flex:1;margin-bottom:1.25rem}
+.proj-features{list-style:none;margin-bottom:1.25rem}
+.proj-features li{
+  font-size:0.82rem;color:var(--muted);padding:0.2rem 0 0.2rem 1.1rem;
+  position:relative;
+}
+.proj-features li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-size:0.75rem}
+.proj-tech{display:flex;flex-wrap:wrap;gap:0.35rem}
+.tech-tag{
+  background:var(--bg2);border:1px solid var(--border);
+  color:var(--accent);font-size:0.72rem;font-weight:600;
+  font-family:var(--mono);padding:0.2rem 0.6rem;border-radius:4px;
+}
+
+/* CONTACT */
+#contact{background:var(--bg)}
+.contact-wrap{
+  max-width:680px;margin:0 auto;text-align:center;
+}
+.contact-emoji{font-size:3rem;margin-bottom:1rem;display:block}
+.contact-cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1rem;margin-top:2rem;
+}
+.contact-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:1.25rem;text-decoration:none;
+  color:var(--text);transition:all 0.2s;display:flex;
+  flex-direction:column;align-items:center;gap:0.5rem;
+}
+.contact-card:hover{border-color:var(--accent2);background:var(--accent3);transform:translateY(-2px)}
+.contact-card-icon{font-size:1.5rem}
+.contact-card-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted)}
+.contact-card-val{font-size:0.85rem;font-weight:500;color:var(--accent);word-break:break-all}
+
+/* FOOTER */
+footer{
+  background:var(--text);color:var(--bg);
+  text-align:center;padding:1.5rem 5%;
+  font-size:0.82rem;
+}
+footer span{color:var(--accent2)}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .about-img-wrap{max-width:280px;margin:0 auto}
+}
+@media(max-width:650px){
+  .nav-links{display:none;position:fixed;top:58px;left:0;right:0;background:var(--bg2);flex-direction:column;padding:1rem;border-bottom:1px solid var(--border);gap:0.25rem}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+  .hero-stats{gap:1.25rem}
+  .hero-btns{flex-direction:column}
+  section{padding:4rem 5%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-brand">Khadija<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle">☰</div>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="hero-dots"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-content">
+    <div class="hero-greeting">Hello, Welcome to my Portfolio!</div>
+    <h1 class="hero-name">
+      I'm <span class="name-acc">Khadija<br>Mansuri</span>
+    </h1>
+    <p class="hero-role">Full Stack Web Developer</p>
+    <p class="hero-desc">Passionate about Python & Django. I build clean, functional web applications that solve real-world problems. Currently pursuing MCA at LJ University, Ahmedabad.</p>
+    <div class="hero-btns">
+      <a href="Khadija_Mansuri_Resume.docx" download class="btn-green">Download Resume</a>
+      <a href="#projects" class="btn-ghost">View My Work</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">3+</div>
+        <div class="hero-stat-label">Projects Built</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">8.0</div>
+        <div class="hero-stat-label">BCA CGPA</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">2+</div>
+        <div class="hero-stat-label">Years Learning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">// about_me</div>
+  <h2 class="sec-title">About <span>Me</span></h2>
+  <div class="sec-divider"></div>
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-img-box">💻</div>
+      <div class="about-badge">MCA Student<br>LJ University</div>
+    </div>
+    <div class="reveal">
+      <p>Hi! I'm <strong>Khadija Mansuri</strong>, a full-stack web developer from Ahmedabad, Gujarat. I completed my BCA with <strong>8.0 CGPA</strong> from Gujarat University and am currently pursuing MCA at LJ University.</p>
+      <p>I have hands-on experience building real-world web applications using Python and Django. My projects range from a property trading platform to an interior design system and a travel booking app.</p>
+      <p>I love turning ideas into functional, well-designed web apps. I'm always eager to learn new technologies and take on challenges that push my skills further. Let's connect and build something amazing! 🚀</p>
+      <div class="about-info">
+        <div class="info-item">
+          <div class="info-label">Location</div>
+          <div class="info-val">Ahmedabad, Gujarat</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Degree</div>
+          <div class="info-val">MCA (Pursuing)</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-val" style="font-size:0.78rem">khadijamansuri44@gmail.com</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Phone</div>
+          <div class="info-val">9316076058</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+ <!-- <div class="sec-label">// my_skills</div> -->
+  <h2 class="sec-title">My <span>Skills</span></h2>
+  <div class="sec-divider"></div>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-card-icon">🐍</div>
+      <div class="skill-card-title">Programming Languages</div>
+      <div class="skill-pills">
+        <span class="pill">Python</span>
+        <span class="pill">Java</span>
+        <span class="pill">PHP</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">C</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🌐</div>
+      <div class="skill-card-title">Web Development</div>
+      <div class="skill-pills">
+        <span class="pill">Django</span>
+        <span class="pill">HTML5</span>
+        <span class="pill">CSS3</span>
+        <span class="pill">ASP.NET</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🗄️</div>
+      <div class="skill-card-title">Database</div>
+      <div class="skill-pills">
+        <span class="pill">MySQL</span>
+        <span class="pill">SQLite</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🛠️</div>
+      <div class="skill-card-title">Tools</div>
+      <div class="skill-pills">
+        <span class="pill">VS Code</span>
+        <span class="pill">PyCharm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+ <!-- <div class="sec-label">// my_projects</div> -->
+
+  <h2 class="sec-title">My <span>Projects</span></h2>
+  <div class="sec-divider"></div>
+  <div class="projects-grid">
+
+    <div class="proj-card reveal">
+      <span class="proj-year">2024</span>
+      <div class="proj-title">Trade Property</div>
+      <p class="proj-desc">A full-stack property trading platform enabling users to list, search, and manage real estate properties with secure authentication.</p>
+      <ul class="proj-features">
+        <li>Property listing, filtering & advanced search</li>
+        <li>Secure user authentication & session management</li>
+        <li>MySQL database for property & user data</li>
+      </ul>
+      <div class="proj-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Django</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <span class="proj-year">2025</span>
+      <div class="proj-title">Interior Designing System</div>
+      <p class="proj-desc">A design management web app where users can browse interior design packages, customize options, and interact with a dynamic Django-powered frontend.</p>
+      <ul class="proj-features">
+        <li>Browse & customize interior design options</li>
+        <li>Dynamic template rendering with Django</li>
+        <li>Responsive UI with MySQL backend</li>
+      </ul>
+      <div class="proj-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Django</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <span class="proj-year">2026</span>
+      <div class="proj-title">Easy Go Tours</div>
+      <p class="proj-desc">A tour and travel booking platform where users can explore destinations, browse tour packages, and manage their travel bookings seamlessly.</p>
+      <ul class="proj-features">
+        <li>Tour package listings with destination details</li>
+        <li>Booking & reservation management system</li>
+        <li>User-friendly dynamic content interface</li>
+      </ul>
+      <div class="proj-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Django</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">HTML/CSS</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+  <!--  <div class="sec-label" style="margin:0 auto 0.75rem;width:fit-content">// contact_me</div> -->
+
+    <h2 class="sec-title reveal">Get In <span>Touch</span></h2>
+    <div class="sec-divider" style="margin:1rem auto 1rem"></div>
+    <p class="sec-sub reveal" style="margin:0 auto">I'm open to full-time roles, internships, and freelance projects. Feel free to reach out — I'd love to connect!</p>
+    <div class="contact-cards reveal">
+      <a href="mailto:khadijamansuri44@gmail.com" class="contact-card">
+        <span class="contact-card-icon">✉️</span>
+        <span class="contact-card-label">Email</span>
+        <span class="contact-card-val">khadijamansuri44@gmail.com</span>
+      </a>
+      <a href="tel:9316076058" class="contact-card">
+        <span class="contact-card-icon">📞</span>
+        <span class="contact-card-label">Phone</span>
+        <span class="contact-card-val">9316076058</span>
+      </a>
+      <a href="#" class="contact-card">
+        <span class="contact-card-icon">📍</span>
+        <span class="contact-card-label">Location</span>
+        <span class="contact-card-val">Ahmedabad, Gujarat</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Copyright © <span>Khadija Mansuri 2026</span> Portfolio | All Rights Reserved.</p>
+</footer>
+
+<script>
+// NAV TOGGLE
+document.getElementById('navToggle').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ACTIVE NAV ON SCROLL
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{
+    if(window.scrollY>=s.offsetTop-100) cur=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href')==='#'+cur);
+  });
+});
+
+// REVEAL ON SCROLL
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*100);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+reveals.forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>
